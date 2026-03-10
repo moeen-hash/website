@@ -14,7 +14,7 @@ export default function BentoGrid() {
         </p>
 
         <div className="mt-4 sm:mt-6 lg:mt-8 grid gap-3 lg:grid-cols-3 lg:grid-rows-2 lg:flex-1 lg:min-h-0">
-          {/* Left tall card - Trade image */}
+          {/* Left tall card - 1500+ Instruments */}
           <div className="relative lg:row-span-2">
             <div className="absolute inset-px rounded-lg bg-[#f5f5f7] lg:rounded-l-[2rem]" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg,0.5rem)+1px)] lg:rounded-l-[calc(2rem+1px)]">
@@ -26,9 +26,26 @@ export default function BentoGrid() {
                   {t('bento.card1.desc')}
                 </p>
               </div>
-              <div className="relative min-h-[200px] sm:min-h-[240px] lg:min-h-0 lg:flex-1 w-full max-lg:mx-auto max-lg:max-w-sm">
-                <div className="absolute inset-x-8 top-6 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-[#1d1d24]/10 bg-[#1d1d24]">
-                  <img src="/trade.png" alt="Trading platform" className="size-full object-cover object-top" />
+              <div className="flex-1 flex items-center justify-center px-4 py-3 sm:px-6">
+                <div className="grid grid-cols-4 gap-x-6 gap-y-5 sm:gap-x-7 sm:gap-y-6 w-full max-w-[320px]">
+                  {[
+                    { src: '/Bitcoin.png', name: 'BTC' },
+                    { src: '/eth.png', name: 'ETH' },
+                    { src: '/apple.png', name: 'AAPL' },
+                    { src: '/tesla.png', name: 'TSLA' },
+                    { src: '/gold.png', name: 'XAU' },
+                    { src: '/oil.png', name: 'OIL' },
+                    { src: '/Microsoft.png', name: 'MSFT' },
+                    { src: '/meta.png', name: 'META' },
+                    { src: '/gbp.png', name: 'GBP' },
+                    { src: '/usa.png', name: 'USD' },
+                    { src: '/bnb 1.png', name: 'BNB' },
+                    { src: '/eth.png', name: 'SOL' },
+                  ].map((logo) => (
+                    <div key={logo.name} className="flex items-center justify-center">
+                      <img src={logo.src} alt={logo.name} className="w-11 h-11 sm:w-12 sm:h-12 object-contain drop-shadow-sm" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
