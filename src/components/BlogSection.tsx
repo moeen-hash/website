@@ -7,7 +7,7 @@ const blogKeys = [
   { img: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop', titleKey: 'blog.post3.title' as const, descKey: 'blog.post3.desc' as const, catKey: 'blog.post3.cat' as const },
 ];
 
-function BlogCard({ post, t }: { post: typeof blogKeys[0]; t: (key: string) => string }) {
+function BlogCard({ post, t }: { post: typeof blogKeys[0]; t: (key: any) => string }) {
   return (
     <a href="#" className="group block">
       <div className="rounded-2xl border border-[#1d1d24]/[0.06] bg-white overflow-hidden transition-all duration-300 hover:border-brand-accent/20 hover:shadow-lg hover:shadow-brand-accent/5">
