@@ -1,0 +1,231 @@
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+
+type Language = 'en' | 'ar';
+
+const translations = {
+  en: {
+    'nav.home': 'Home',
+    'nav.markets': 'Markets',
+    'nav.about': 'About',
+    'nav.blogs': 'Blogs',
+    'nav.tradingTools': 'Trading Tools',
+    'nav.contactUs': 'Contact Us',
+    'nav.login': 'Log in',
+    'nav.signup': 'Sign up',
+    'market.forex': 'Forex',
+    'market.commodities': 'Commodities',
+    'market.stocks': 'Stocks',
+    'market.etfs': 'ETFs',
+    'market.crypto': 'Cryptocurrencies',
+    'market.indices': 'Indices',
+    'hero.title.before': 'Trade smarter with ',
+    'hero.title.accent': 'real-time',
+    'hero.title.after': ' market insights',
+    'hero.subtitle': 'Access global markets, advanced charting tools, and AI-powered analytics — all in one platform built for modern traders.',
+    'hero.getStarted': 'Get Started',
+    'hero.learnMore': 'Learn More',
+    'bento.tag': 'Why Equitix',
+    'bento.title.line1': 'Built for traders who',
+    'bento.title.accent': 'demand',
+    'bento.title.line2': 'more',
+    'bento.subtitle': 'Professional-grade tools, lightning execution, and enterprise security — unified in one powerful platform.',
+    'bento.card1.title': 'Fast Execution',
+    'bento.card1.desc': 'Lightning-fast order execution with real-time market data across all instruments.',
+    'bento.card2.title': 'Advanced Analytics',
+    'bento.card2.desc': 'AI-powered insights and charting tools to stay ahead of the market.',
+    'bento.card3.title': 'Bank-Grade Security',
+    'bento.card3.desc': 'Your funds and data are protected with enterprise-level encryption.',
+    'bento.card4.title': 'Powerful APIs',
+    'bento.card4.desc': 'Build custom strategies with our developer-friendly trading APIs.',
+    'blog.title': 'Latest from our',
+    'blog.title.accent': 'blog',
+    'blog.subtitle': 'Insights, strategies, and market analysis to sharpen your trading edge.',
+    'blog.readMore': 'Read more',
+    'blog.viewAll': 'View All Articles',
+    'blog.post1.cat': 'Market Analysis',
+    'blog.post1.title': 'How to Read Candlestick Patterns Like a Pro Trader',
+    'blog.post1.desc': 'Master the art of candlestick analysis and learn to identify key reversal and continuation patterns that drive market movements.',
+    'blog.post2.cat': 'Crypto',
+    'blog.post2.title': 'Bitcoin Halving 2025: What It Means for Your Portfolio',
+    'blog.post2.desc': 'Understand the impact of Bitcoin halving events on price action and discover strategies to position your portfolio ahead of time.',
+    'blog.post3.cat': 'Strategy',
+    'blog.post3.title': 'Risk Management: The One Skill Every Trader Needs',
+    'blog.post3.desc': 'Learn proven risk management techniques used by professional traders to protect capital and maximize long-term returns.',
+    'steps.tag': 'Get Started',
+    'steps.title.line1': 'Start trading in',
+    'steps.title.accent': 'three',
+    'steps.title.line2': 'easy steps',
+    'steps.subtitle': 'Open your account, fund it, and start trading — all in just a few minutes.',
+    'steps.step1.title': 'Create Your Account',
+    'steps.step1.desc': 'Sign up in minutes with your name, email, and phone number. Quick verification gets you trading-ready.',
+    'steps.step2.title': 'Fund Your Account',
+    'steps.step2.desc': 'Choose from multiple deposit methods and select the amount that fits your trading goals.',
+    'steps.step3.title': 'Start Trading',
+    'steps.step3.desc': 'Access global markets, place trades with advanced order types, and manage your portfolio in real time.',
+    'steps.cta': 'Open Free Account',
+    'faq.title.line1': 'Frequently asked',
+    'faq.title.accent': 'questions',
+    'faq.subtitle': 'Everything you need to know before you start trading with Equitix.',
+    'faq.cta': 'Contact Support',
+    'faq.q1': 'What is Equitix and how does it work?',
+    'faq.a1': 'Equitix is a modern trading platform that gives you access to global markets including forex, stocks, commodities, crypto, and indices. Sign up, fund your account, and start trading with professional-grade tools.',
+    'faq.q2': 'What is the minimum deposit to start trading?',
+    'faq.a2': 'You can start trading with as little as $500. We offer multiple deposit tiers so you can choose the amount that best fits your trading strategy and goals.',
+    'faq.q3': 'Is my money safe with Equitix?',
+    'faq.a3': 'Absolutely. We use bank-grade encryption, segregated client accounts, and are regulated by top-tier financial authorities. Your funds are always protected.',
+    'faq.q4': 'What markets can I trade on Equitix?',
+    'faq.a4': 'You can trade forex pairs, global stocks, commodities like gold and oil, cryptocurrencies, ETFs, and major market indices — all from a single account.',
+    'faq.q5': 'How fast are order executions?',
+    'faq.a5': 'Our infrastructure delivers ultra-low latency execution, typically under 50 milliseconds. You get real-time market data and instant order fills across all instruments.',
+    'faq.q6': 'Does Equitix offer a mobile app?',
+    'faq.a6': 'Yes. Our mobile app is available on iOS and Android with full trading capabilities, real-time charts, push notifications for signals, and portfolio management on the go.',
+    'faq.q7': 'How do I withdraw my funds?',
+    'faq.a7': 'Withdrawals are processed within 24 hours. You can withdraw via bank transfer, credit card, or e-wallets. There are no hidden fees on withdrawals.',
+    'contact.title': 'Get in',
+    'contact.title.accent': 'touch',
+    'contact.subtitle': 'Have a question or need help? Fill out the form and our team will get back to you shortly.',
+    'contact.firstName': 'First Name',
+    'contact.lastName': 'Last Name',
+    'contact.email': 'Email Address',
+    'contact.phone': 'Phone Number',
+    'contact.subject': 'Subject',
+    'contact.message': 'Message',
+    'contact.send': 'Send Message',
+    'contact.info.title': 'Contact Information',
+    'contact.info.subtitle': 'Reach out to us directly or follow us on social media.',
+    'contact.info.email': 'support@equitix.com',
+    'contact.info.phone': '+966 800 123 4567',
+    'contact.info.social': 'Follow Us',
+  },
+  ar: {
+    'nav.home': 'الرئيسية',
+    'nav.markets': 'الأسواق',
+    'nav.about': 'حول',
+    'nav.blogs': 'المدونات',
+    'nav.tradingTools': 'أدوات التداول',
+    'nav.contactUs': 'اتصل بنا',
+    'nav.login': 'تسجيل الدخول',
+    'nav.signup': 'إنشاء حساب',
+    'market.forex': 'فوركس',
+    'market.commodities': 'السلع',
+    'market.stocks': 'الأسهم',
+    'market.etfs': 'صناديق المؤشرات',
+    'market.crypto': 'العملات الرقمية',
+    'market.indices': 'المؤشرات',
+    'hero.title.before': 'تداول بذكاء مع ',
+    'hero.title.accent': 'رؤى سوقية',
+    'hero.title.after': ' فورية',
+    'hero.subtitle': 'اصل إلى الأسواق العالمية وأدوات الرسوم البيانية المتقدمة والتحليلات المدعومة بالذكاء الاصطناعي — كل ذلك في منصة واحدة مصممة للمتداولين العصريين.',
+    'hero.getStarted': 'ابدأ الآن',
+    'hero.learnMore': 'اعرف المزيد',
+    'bento.tag': 'لماذا إكويتكس',
+    'bento.title.line1': 'صُمم للمتداولين الذين',
+    'bento.title.accent': 'يطلبون',
+    'bento.title.line2': 'المزيد',
+    'bento.subtitle': 'أدوات احترافية، تنفيذ فائق السرعة، وأمان على مستوى المؤسسات — كل ذلك في منصة واحدة.',
+    'bento.card1.title': 'تنفيذ سريع',
+    'bento.card1.desc': 'تنفيذ فوري للأوامر مع بيانات السوق الحية عبر جميع الأدوات المالية.',
+    'bento.card2.title': 'تحليلات متقدمة',
+    'bento.card2.desc': 'رؤى مدعومة بالذكاء الاصطناعي وأدوات رسوم بيانية للبقاء في الصدارة.',
+    'bento.card3.title': 'أمان بمستوى البنوك',
+    'bento.card3.desc': 'أموالك وبياناتك محمية بتشفير على مستوى المؤسسات.',
+    'bento.card4.title': 'واجهات برمجة قوية',
+    'bento.card4.desc': 'أنشئ استراتيجيات مخصصة باستخدام واجهات برمجة التداول.',
+    'blog.title': 'آخر مقالات',
+    'blog.title.accent': 'المدونة',
+    'blog.subtitle': 'رؤى واستراتيجيات وتحليلات سوقية لتعزيز مهاراتك في التداول.',
+    'blog.readMore': 'اقرأ المزيد',
+    'blog.viewAll': 'عرض جميع المقالات',
+    'blog.post1.cat': 'تحليل السوق',
+    'blog.post1.title': 'كيف تقرأ أنماط الشموع اليابانية كمتداول محترف',
+    'blog.post1.desc': 'أتقن فن تحليل الشموع اليابانية وتعلم تحديد أنماط الانعكاس والاستمرار الرئيسية التي تحرك الأسواق.',
+    'blog.post2.cat': 'عملات رقمية',
+    'blog.post2.title': 'تنصيف البيتكوين 2025: ماذا يعني لمحفظتك',
+    'blog.post2.desc': 'افهم تأثير أحداث تنصيف البيتكوين على حركة الأسعار واكتشف استراتيجيات لتجهيز محفظتك مسبقاً.',
+    'blog.post3.cat': 'استراتيجية',
+    'blog.post3.title': 'إدارة المخاطر: المهارة الأساسية لكل متداول',
+    'blog.post3.desc': 'تعلم تقنيات إدارة المخاطر المثبتة التي يستخدمها المتداولون المحترفون لحماية رأس المال وتعظيم العوائد.',
+    'steps.tag': 'ابدأ الآن',
+    'steps.title.line1': 'ابدأ التداول في',
+    'steps.title.accent': 'ثلاث',
+    'steps.title.line2': 'خطوات سهلة',
+    'steps.subtitle': 'افتح حسابك، موّله، وابدأ التداول — كل ذلك في دقائق معدودة.',
+    'steps.step1.title': 'أنشئ حسابك',
+    'steps.step1.desc': 'سجّل في دقائق باستخدام اسمك وبريدك الإلكتروني ورقم هاتفك. التحقق السريع يجعلك جاهزاً للتداول.',
+    'steps.step2.title': 'موّل حسابك',
+    'steps.step2.desc': 'اختر من طرق إيداع متعددة وحدد المبلغ الذي يناسب أهدافك في التداول.',
+    'steps.step3.title': 'ابدأ التداول',
+    'steps.step3.desc': 'اوصل إلى الأسواق العالمية، نفّذ صفقات بأنواع أوامر متقدمة، وأدر محفظتك في الوقت الفعلي.',
+    'steps.cta': 'افتح حساب مجاني',
+    'faq.title.line1': 'الأسئلة الشائعة',
+    'faq.title.accent': 'والأجوبة',
+    'faq.subtitle': 'كل ما تحتاج معرفته قبل أن تبدأ التداول مع إكويتكس.',
+    'faq.cta': 'تواصل مع الدعم',
+    'faq.q1': 'ما هي إكويتكس وكيف تعمل؟',
+    'faq.a1': 'إكويتكس هي منصة تداول حديثة تمنحك الوصول إلى الأسواق العالمية بما في ذلك الفوركس والأسهم والسلع والعملات الرقمية والمؤشرات. سجّل، موّل حسابك، وابدأ التداول بأدوات احترافية.',
+    'faq.q2': 'ما هو الحد الأدنى للإيداع لبدء التداول؟',
+    'faq.a2': 'يمكنك بدء التداول بمبلغ 500 دولار فقط. نوفر مستويات إيداع متعددة لتختار المبلغ الذي يناسب استراتيجيتك وأهدافك.',
+    'faq.q3': 'هل أموالي آمنة مع إكويتكس؟',
+    'faq.a3': 'بالتأكيد. نستخدم تشفيراً بمستوى البنوك، وحسابات عملاء منفصلة، ونخضع لرقابة هيئات مالية عليا. أموالك محمية دائماً.',
+    'faq.q4': 'ما الأسواق التي يمكنني التداول فيها؟',
+    'faq.a4': 'يمكنك تداول أزواج الفوركس والأسهم العالمية والسلع مثل الذهب والنفط والعملات الرقمية وصناديق المؤشرات والمؤشرات الرئيسية — كل ذلك من حساب واحد.',
+    'faq.q5': 'ما مدى سرعة تنفيذ الأوامر؟',
+    'faq.a5': 'بنيتنا التحتية توفر تنفيذاً بزمن استجابة منخفض للغاية، عادةً أقل من 50 مللي ثانية. تحصل على بيانات سوق حية وتنفيذ فوري للأوامر.',
+    'faq.q6': 'هل توفر إكويتكس تطبيق جوال؟',
+    'faq.a6': 'نعم. تطبيقنا متاح على iOS و Android مع إمكانيات تداول كاملة ورسوم بيانية حية وإشعارات فورية وإدارة المحفظة أثناء التنقل.',
+    'faq.q7': 'كيف أسحب أموالي؟',
+    'faq.a7': 'تتم معالجة عمليات السحب خلال 24 ساعة. يمكنك السحب عبر التحويل البنكي أو بطاقة الائتمان أو المحافظ الإلكترونية. لا توجد رسوم خفية.',
+    'contact.title': 'تواصل',
+    'contact.title.accent': 'معنا',
+    'contact.subtitle': 'هل لديك سؤال أو تحتاج مساعدة؟ املأ النموذج وسيتواصل فريقنا معك قريباً.',
+    'contact.firstName': 'الاسم الأول',
+    'contact.lastName': 'اسم العائلة',
+    'contact.email': 'البريد الإلكتروني',
+    'contact.phone': 'رقم الهاتف',
+    'contact.subject': 'الموضوع',
+    'contact.message': 'الرسالة',
+    'contact.send': 'إرسال الرسالة',
+    'contact.info.title': 'معلومات التواصل',
+    'contact.info.subtitle': 'تواصل معنا مباشرة أو تابعنا على وسائل التواصل الاجتماعي.',
+    'contact.info.email': 'support@equitix.com',
+    'contact.info.phone': '+966 800 123 4567',
+    'contact.info.social': 'تابعنا',
+  },
+} as const;
+
+type TranslationKey = keyof typeof translations.en;
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: TranslationKey) => string;
+  isRTL: boolean;
+}
+
+const LanguageContext = createContext<LanguageContextType | null>(null);
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>('en');
+  const isRTL = language === 'ar';
+
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = language;
+  }, [language, isRTL]);
+
+  const t = (key: TranslationKey): string => {
+    return translations[language][key] || key;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) throw new Error('useLanguage must be used within LanguageProvider');
+  return context;
+}

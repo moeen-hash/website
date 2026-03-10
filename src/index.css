@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  src: url('/fonts/DroidArabicKufi.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-arabic: 'Droid Arabic Kufi', sans-serif;
+  --color-brand-blue: #3384ff;
+  --color-brand-dark: #0d0d0d;
+  --color-brand-gray: #747474;
+  --color-brand-card: #2d2d2d;
+  --color-brand-border: #747474;
+  --color-brand-accent: #089981;
+  --color-brand-success: #089981;
+  --breakpoint-3xl: 1920px;
+}
+
+@layer base {
+  html {
+    font-size: clamp(1rem, 0.952rem + 0.244vw, 1.125rem);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Satoshi', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Hide scrollbar for slider */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* RTL font overrides — outside @layer to beat utility specificity */
+html[dir="rtl"] body,
+html[dir="rtl"] .font-satoshi,
+html[dir="rtl"] [class*="font-satoshi"] {
+  font-family: 'Droid Arabic Kufi', sans-serif !important;
+}
