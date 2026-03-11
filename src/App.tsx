@@ -1,5 +1,5 @@
 import HeroSection from './components/HeroSection'
-import BentoGrid from './components/BentoGrid'
+import InstrumentsSection from './components/InstrumentsSection'
 import BlogSection from './components/BlogSection'
 import StepsSection from './components/StepsSection'
 import FAQSection from './components/FAQSection'
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <HeroSection />
-      <BentoGrid />
+      <InstrumentsSection />
       <BlogSection />
       <StepsSection />
       <FAQSection />

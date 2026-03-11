@@ -43,6 +43,16 @@
   scrollbar-width: none;
 }
 
+/* Instrument marquee animations */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 /* RTL font overrides — outside @layer to beat utility specificity */
 html[dir="rtl"] body,
 html[dir="rtl"] .font-satoshi,

@@ -42,6 +42,37 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Stats bar */}
+      <div className="relative z-10 w-full">
+        <div className="w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 3xl:px-32">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 gap-x-4 sm:gap-0 py-8 sm:py-10">
+            {([
+              { value: 'hero.stat1.value' as const, label: 'hero.stat1.label' as const },
+              { value: 'hero.stat2.value' as const, label: 'hero.stat2.label' as const },
+              { value: 'hero.stat4.value' as const, label: 'hero.stat4.label' as const },
+              { value: 'hero.stat5.value' as const, label: 'hero.stat5.label' as const },
+            ]).map((stat, i) => (
+              <div key={i} className="relative flex items-center justify-center">
+                {i % 2 !== 0 && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-10 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+                )}
+                {i >= 2 && (
+                  <div className="sm:hidden absolute top-0 left-1/2 -translate-x-1/2 h-px w-10 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                )}
+                <div className="text-center">
+                  <p className="text-white text-xl sm:text-2xl md:text-3xl lg:text-[34px] font-bold font-satoshi leading-tight tracking-tight">
+                    {t(stat.value)}
+                  </p>
+                  <p className="text-white/50 text-[10px] sm:text-xs md:text-sm font-medium font-satoshi uppercase tracking-[0.15em] mt-2">
+                    {t(stat.label)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
