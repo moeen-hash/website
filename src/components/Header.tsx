@@ -123,8 +123,6 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const { setPage } = usePage();
 
-  const currentLang = languages.find((l) => l.code === language)!;
-
   const handleClose = () => {
     setIsOpen(false);
     setExpandedMenu(null);
@@ -150,16 +148,25 @@ export default function Header() {
             </button>
 
             {/* Language Switcher */}
-            <button
-              onClick={() => setLangOpen(true)}
-              className="flex items-center cursor-pointer"
-            >
-              <img
-                src={currentLang.flag}
-                alt={currentLang.label}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover"
-              />
-            </button>
+            <div className="flex items-center gap-1 bg-white/[0.06] rounded-full p-1">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`flex items-center justify-center rounded-full transition-all duration-200 cursor-pointer ${
+                    language === lang.code
+                      ? 'ring-2 ring-brand-accent ring-offset-1 ring-offset-transparent'
+                      : 'opacity-40 hover:opacity-70'
+                  }`}
+                >
+                  <img
+                    src={lang.flag}
+                    alt={lang.label}
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
 
             {/* Hamburger */}
             <button

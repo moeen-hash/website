@@ -1,5 +1,7 @@
 import HeroSection from './components/HeroSection'
 import InstrumentsSection from './components/InstrumentsSection'
+import FeaturesSection from './components/FeaturesSection'
+import AccountsSection from './components/AccountsSection'
 import BlogSection from './components/BlogSection'
 import StepsSection from './components/StepsSection'
 import FAQSection from './components/FAQSection'
@@ -17,6 +19,8 @@ function App() {
     <>
       <HeroSection />
       <InstrumentsSection />
+      <FeaturesSection />
+      <AccountsSection />
       <BlogSection />
       <StepsSection />
       <FAQSection />

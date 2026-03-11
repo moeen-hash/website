@@ -22,16 +22,37 @@ export default function HeroSection() {
 
       <Header />
 
-      <div className="relative z-10 flex-1 flex items-center justify-center w-full">
+      {/* Hero image - absolutely positioned, doesn't affect layout */}
+      <div className="hidden md:block absolute right-52 rtl:right-auto rtl:left-52 top-32 z-0 overflow-hidden" style={{ width: '300px', height: '50vh' }}>
+        <img
+          src="/hero.png"
+          alt=""
+          className="w-full object-cover object-top"
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#1d1d24] to-transparent" />
+      </div>
+
+      <div className="relative z-10 flex-1 flex items-center w-full">
         <div className="w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 3xl:px-32">
-          <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-[700px]">
+          <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 max-w-[600px]">
             <h1 className="text-white text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[58px] font-bold leading-[1.12] font-satoshi">
               {t('hero.title.before')}<span className="text-brand-accent">{t('hero.title.accent')}</span>{t('hero.title.after')}
             </h1>
             <p className="text-white/45 text-sm sm:text-base md:text-lg leading-relaxed font-satoshi max-w-[500px]">
               {t('hero.subtitle')}
             </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+
+            {/* Mobile hero image - between subtitle and CTA */}
+            <div className="md:hidden relative overflow-hidden rounded-2xl mx-auto" style={{ height: '28vh', width: '60%' }}>
+              <img
+                src="/hero.png"
+                alt=""
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1d1d24] to-transparent" />
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4 pt-8 md:pt-2">
               <button className="bg-brand-accent text-white text-sm sm:text-base font-semibold font-satoshi px-6 sm:px-8 py-3 sm:py-3.5 rounded-full hover:bg-[#078770] transition-colors cursor-pointer">
                 {t('hero.getStarted')}
               </button>
